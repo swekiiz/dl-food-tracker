@@ -12,16 +12,25 @@ const theme = createTheme({
       xl: 1920,
     },
   },
-  // palette: {
-  //   primary: {},
-  //   secondary: {},
-  //   text: {},
-  //   background: {},
-  //   success: {},
-  //   warning: {},
-  //   error: {},
-  //   info: {},
-  // },
+  palette: {
+    primary: {
+      light: '#D7C0AE',
+      main: '#967E76',
+    },
+    secondary: {
+      main: '#6B7280',
+    },
+    background: {
+      default: '#F5EFE6',
+    },
+    link: '#967E76',
+    //   text: {},
+    //   background: {},
+    //   success: {},
+    //   warning: {},
+    //   error: {},
+    //   info: {},
+  },
   typography: {
     fontFamily: `Lexend, sans-serif`,
     h1: { fontSize: '5rem', lineHeight: '6rem', fontWeight: 'normal', letterSpacing: 0 },
@@ -82,6 +91,26 @@ theme.components = {
       },
       body: {
         backgroundColor: theme.palette.background.default,
+      },
+    },
+  },
+  MuiButton: {
+    styleOverrides: {
+      root: {
+        textTransform: 'none',
+        fontWeight: 700,
+      },
+      containedPrimary: {
+        boxShadow: 'unset',
+        borderRadius: 12,
+        fontSize: '1.125rem',
+        backgroundColor: theme.palette.primary.light,
+        color: theme.palette.primary.main,
+        '&:hover': {
+          boxShadow: 'unset',
+          backgroundColor: theme.palette.primary.main,
+          color: theme.palette.common.white,
+        },
       },
     },
   },

@@ -1,3 +1,13 @@
+export declare module '@mui/material/styles/createPalette' {
+  interface Palette {
+    link: string
+  }
+
+  interface PaletteOptions {
+    link: string
+  }
+}
+
 export declare module '@mui/material/styles' {
   interface TypographyVariants {
     label: React.CSSProperties

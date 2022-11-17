@@ -19,7 +19,7 @@ const CustomApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps
   return (
     <>
       <Head>
-        <title>CEPP</title>
+        <title>DL Food Tracker</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <StyledEngineProvider injectFirst>

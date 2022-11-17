@@ -4,7 +4,7 @@ import React from 'react'
 
 import { createEmotionCache } from 'libs/emotion'
 
-const description = `CEPP`
+const description = `dl food tracker`
 
 class CustomDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
