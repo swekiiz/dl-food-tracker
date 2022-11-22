@@ -18,7 +18,9 @@ const theme = createTheme({
       main: '#967E76',
     },
     secondary: {
+      light: '#B7C4CF',
       main: '#6B7280',
+      dark: '#545964',
     },
     background: {
       default: '#F5EFE6',
@@ -99,16 +101,25 @@ theme.components = {
       root: {
         textTransform: 'none',
         fontWeight: 700,
-      },
-      containedPrimary: {
         boxShadow: 'unset',
         borderRadius: 12,
         fontSize: '1.125rem',
+      },
+      containedPrimary: {
         backgroundColor: theme.palette.primary.light,
         color: theme.palette.primary.main,
         '&:hover': {
           boxShadow: 'unset',
           backgroundColor: theme.palette.primary.main,
+          color: theme.palette.common.white,
+        },
+      },
+      containedSecondary: {
+        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.common.white,
+        '&:hover': {
+          boxShadow: 'unset',
+          backgroundColor: theme.palette.secondary.dark,
           color: theme.palette.common.white,
         },
       },

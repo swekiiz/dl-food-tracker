@@ -1,10 +1,17 @@
-import { Link as MuiLink } from '@mui/material'
+import { Box, Link as MuiLink, styled } from '@mui/material'
 import Link from 'next/link'
 import { ReactNode } from 'react'
 
-import { InternalLinkContainer } from './components'
+const shouldForwardProp = (props: string) => !['isLinkStyle'].includes(props)
+const InternalLinkContainer = styled(Box, { shouldForwardProp })<{ isLinkStyle?: boolean }>(
+  ({ theme, isLinkStyle }) => ({
+    cursor: 'pointer',
+    display: 'contents',
+    color: isLinkStyle ? theme.palette.link : 'unset',
+  }),
+)
 
-type Props = {
+type CoreLinkProps = {
   href?: string
   path?: string
   children: ReactNode
@@ -13,7 +20,7 @@ type Props = {
   isLinkStyle?: boolean
 }
 
-export const CoreLink = ({ href, path, children, download, className, isLinkStyle }: Props) => {
+export const CoreLink = ({ href, path, children, download, className, isLinkStyle }: CoreLinkProps) => {
   if (path) {
     return (
       <Link href={path} passHref>
