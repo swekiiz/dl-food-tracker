@@ -14,8 +14,7 @@ type ResultProviderProps = {
 const ResultContext = createContext<IResultContext>({} as IResultContext)
 
 export const ResultProvider = ({ children }: ResultProviderProps) => {
-  //   const [result, setResult] = useState<Result | null>(null)
-  const [result, setResult] = useState<Result | null>({ langsat: 0.5, longan: 0.3, longgong: 0.2 })
+  const [result, setResult] = useState<Result | null>(null)
 
   const value: IResultContext = {
     result,
