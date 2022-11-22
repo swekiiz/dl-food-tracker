@@ -38,6 +38,14 @@ const CircleClip = styled(Box)(({ theme }) => ({
   overflow: 'hidden',
 }))
 
+const Crown = styled(Box)(() => ({
+  borderRadius: '100%',
+  position: 'absolute',
+  width: 300,
+  height: 300,
+  marginTop: -80,
+}))
+
 const SecondaryCircle = styled(Box)(({ theme }) => ({
   width: CIRCLE_SCALE,
   height: CIRCLE_SCALE,
@@ -71,22 +79,26 @@ const ResultContent = styled(Stack)(({ theme }) => ({
 }))
 
 type FruitPredictCardProps = {
+  text: string
   imgSrc?: string
   value?: number
 }
 
-const FruitPredictCard = ({ imgSrc, value }: FruitPredictCardProps) => {
+const FruitPredictCard = ({ imgSrc, value, text }: FruitPredictCardProps) => {
   if (!value) {
     return null
   }
 
   return (
-    <Stack alignItems="center" gap={2}>
+    <Stack alignItems="center" gap={3}>
+      <Typography variant="h4" color="primary" fontWeight={700}>
+        {text}
+      </Typography>
       <BorderCircle>
         <img src={imgSrc} width="100%" />
       </BorderCircle>
       <Typography variant="h5" color="primary" fontWeight={700}>
-        {value * 100}%
+        {(value * 100).toFixed(2)}%
       </Typography>
     </Stack>
   )
@@ -100,11 +112,25 @@ export const Result = () => {
     return Object.keys(result).reduce((a, b) => (result[a] > result[b] ? a : b))
   }, [result])
 
-  if (!result) {
+  const displayResult = useMemo(() => {
+    if (!result) {
+      return
+    }
+
+    return {
+      longgong: +result.longgong.toFixed(4),
+      langsat: +result.langsat.toFixed(4),
+      longan: +result.longan.toFixed(4),
+    }
+  }, [result])
+
+  if (!displayResult || !result) {
     return (
-      <Typography variant="h1" color="secodary">
-        No result
-      </Typography>
+      <Stack height="100%" justifyContent="center" alignItems="center">
+        <Typography variant="h1" color="error">
+          No result
+        </Typography>
+      </Stack>
     )
   }
 
@@ -117,18 +143,23 @@ export const Result = () => {
           </Typography>
         </HeaderText>
         <Stack direction="row" justifyContent="space-between" alignItems="center">
-          <FruitPredictCard imgSrc="/static/images/longgong.svg" value={result.longgong} />
-          <FruitPredictCard imgSrc="/static/images/langsat.svg" value={result.langsat} />
-          <FruitPredictCard imgSrc="/static/images/longan.svg" value={result.longan} />
+          <FruitPredictCard text="Langsat" imgSrc="/static/images/longgong.svg" value={displayResult.longgong} />
+          <FruitPredictCard text="Longgong" imgSrc="/static/images/langsat.svg" value={displayResult.langsat} />
+          <FruitPredictCard text="Longan" imgSrc="/static/images/longan.svg" value={displayResult.longan} />
         </Stack>
       </ContentWrapper>
       <ResultContent>
+        <Crown>
+          <img src="/static/images/crown.svg" width="100%" height="100%" />
+        </Crown>
         <CircleClip>
           <img src={`/static/images/${winner}.svg`} width="100%" height="100%" />
         </CircleClip>
-        <Typography variant="h3" color="white" fontWeight={700} textAlign="center">
-          {winner}
-        </Typography>
+        <Box width="100%" position="relative" sx={{ zIndex: 5 }}>
+          <Typography variant="h3" color="white" fontWeight={700} textAlign="center" textTransform="capitalize">
+            {winner}
+          </Typography>
+        </Box>
       </ResultContent>
       <SecondaryCircle />
     </Root>

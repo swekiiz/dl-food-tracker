@@ -17,7 +17,7 @@ export const Navbar = () => {
       <Box py={1}>
         <Toolbar disableGutters>
           <Stack direction="row" width="100%" justifyContent="center" alignItems="center" position="relative" gap={4}>
-            <Stack position="absolute" pl={8} left={0} justifyContent="center" alignItems="center">
+            <Stack position="absolute" left={0} justifyContent="center" alignItems="center">
               <CoreLink path="/">
                 <img src="/static/images/logo.svg" width={180} />
               </CoreLink>
@@ -33,7 +33,7 @@ export const Navbar = () => {
               </StyledButton>
             </CoreLink>
             <Stack position="absolute" right={0} justifyContent="center" alignItems="center">
-              <CoreLink href="#">
+              <CoreLink path="/">
                 <img src="/static/images/question.svg" width={48} />
               </CoreLink>
             </Stack>

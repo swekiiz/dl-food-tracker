@@ -4,11 +4,11 @@ import { httpClient } from './httpClient'
 
 export const uploadImage = async (data: FormData): Promise<ResultResponse> => {
   return httpClient
-    .post<ResultResponse>('/predict', data, {
+    .post<ResultResponse>('/predict/image', data, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
     .then((response) => {
-      if (response.status === 201) {
+      if (response.status === 200) {
         return response.data
       }
 

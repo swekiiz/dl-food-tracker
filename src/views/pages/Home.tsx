@@ -2,6 +2,7 @@ import { Box, Button, Stack, Typography, styled } from '@mui/material'
 import { uploadImage } from 'apis/predict'
 import { useResultContext } from 'contexts/ResultContext'
 import { isNumber, isString } from 'lodash'
+import { useRouter } from 'next/router'
 import { ReactNode, useRef, useState } from 'react'
 import { UploadImage } from 'views/components/UploadImage'
 
@@ -143,6 +144,8 @@ const data: Array<Omit<CardProps, 'children' | 'reverse'> & { text: string }> = 
 export const Home = () => {
   const { setResult } = useResultContext()
 
+  const router = useRouter()
+
   const [file, setFile] = useState<File | null>(null)
 
   const trackerRef = useRef<HTMLDivElement | null>(null)
@@ -151,11 +154,13 @@ export const Home = () => {
     if (!file) return
 
     const formData = new FormData()
-    formData.append('images', file)
+    formData.append('file', file)
 
     try {
       const result = await uploadImage(formData)
       setResult(resultTransformer(result))
+
+      router.push('/result')
     } catch (err) {
       console.log(err)
     }
